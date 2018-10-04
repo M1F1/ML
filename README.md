@@ -1,2 +1,3 @@
 # ml2018-19
-Materiały do wykładu Uczenie maszynowe w semestrze zimowym 2018-2019
+
+To repozytorium zawiera materiały do wykładu "Nauczanie maszynowe" w semestrze zimowym roku akademickiego 2018-2019.
