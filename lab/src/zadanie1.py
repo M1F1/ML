@@ -114,3 +114,35 @@ def animate(f, training_loop):
         interval=10, # ms
         repeat=False)
     return ani
+
+def opt_assert(opt_cls, opt_kwargs):
+    def _print_theta(theta):
+        for k, v in theta.items():
+            print("  {}: {}".format(k, v.ravel()))
+    initial_params = {
+        "theta_piesek": .43*np.ones(shape=(2,2)),
+        "theta_konik ": 4.3*np.ones(shape=(3,)),
+        "theta_rybka ": .7*np.ones(shape=(1,1,1))
+    }
+    opt = opt_cls(initial_params=initial_params.copy(), **opt_kwargs)
+    print("{} {}".format(opt_cls.__name__, opt_kwargs))
+    print("initial params:")
+    _print_theta(initial_params)
+    for i in range(3):
+        gradients = {
+            "theta_piesek": (i+1)*np.arange(1,5).reshape((2,2)),
+            "theta_konik ": (i+4)*np.arange(1,4).reshape((3,)),
+            "theta_rybka ": (i+3)*np.ones(shape=(1,1,1))
+        }
+        if opt_cls.__name__ == "Nesterov":
+            opt.training_phase = True
+            opt.step(gradients)
+            print("optimizer params (training_phase == True) - after step {}:".format(i+1))
+            _print_theta(opt.get_params())
+            opt.training_phase = False
+            print("optimizer params (training_phase == True) - after step {}:".format(i+1))
+            _print_theta(opt.get_params())
+        else:
+            opt.step(gradients)
+            print("optimizer params - after step {}:".format(i+1))
+            _print_theta(opt.get_params())
