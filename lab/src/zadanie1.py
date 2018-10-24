@@ -11,7 +11,11 @@ class ExpPoly2D:
     def __init__(self, cs, ds):
         self.cs = cs
         self.ds = ds
-
+        
+    #def __str__(self,):
+    #    print(self.cs)
+    #    print(self.ds)
+        
     def _output(self, x1, x2, c, d):
         return d * np.exp(-np.polynomial.polynomial.polyval2d(x1, x2, c)**2)
 
