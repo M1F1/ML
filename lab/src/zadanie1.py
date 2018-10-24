@@ -144,7 +144,7 @@ def opt_assert(opt_cls, opt_kwargs):
             print("optimizer params (training_phase == True) - after step {}:".format(i+1))
             _print_theta(opt.get_params())
             opt.training_phase = False
-            print("optimizer params (training_phase == True) - after step {}:".format(i+1))
+            print("optimizer params (training_phase == False) - after step {}:".format(i+1))
             _print_theta(opt.get_params())
         else:
             opt.step(gradients)
